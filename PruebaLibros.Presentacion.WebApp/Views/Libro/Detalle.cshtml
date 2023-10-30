@@ -1,0 +1,53 @@
+﻿@model LibroDTO
+@{
+    ViewData["Title"] = "Consultar Libro";
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["Error"]
+        @if (TempData["Opciones"] != null)
+        {
+            <ul>
+                @foreach (string opcion in ((List<string>)TempData["Opciones"]))
+                {
+                    <li>@opcion</li>
+                }
+            </ul>
+        }
+    </div>
+}
+@if (TempData["Ok"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["Ok"]
+    </div>
+}
+
+<h1 class="text-center">Detalle Libro</h1>
+
+
+<div class="row">
+    <div class="offset-12">
+        <div class="card border">
+            <div class="card-header bg-dark">
+                <h3 class="text-white"><strong>Detalle de Libro</strong></h3>
+            </div>
+            <div class="card-body">
+                
+                <ul class="list-group">
+                    <li class="list-group-item"><strong>Identificador: </strong>@Html.DisplayFor(a=>a.IdLibro)</li>
+                    <li class="list-group-item"><strong>Titulo: </strong>@Html.DisplayFor(a=>a.Titulo)</li>
+                    <li class="list-group-item"><strong>Año: </strong>@Html.DisplayFor(a=>a.Año)</li>
+                    <li class="list-group-item"><strong>Genero: </strong>@Html.DisplayFor(a=>a.Genero)</li>
+                    <li class="list-group-item"><strong>Numero de paginas: </strong>@Html.DisplayFor(a=>a.NumPaginas)</li>
+                    <li class="list-group-item"><strong>Identificador Autor: </strong>@Html.DisplayFor(a=>a.IdAutor)</li>
+                    <li class="list-group-item"><strong>Nombre Autor: </strong>@Html.DisplayFor(a=>a.Autor.NombreCompleto)</li>
+                </ul>
+
+                <a asp-asp-controller="Libro" asp-action="Index">Volver</a>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,85 @@
+﻿@model In_LibroDTO
+@{
+    ViewData["Title"] = "Crear Libro";
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["Error"]
+        @if (TempData["Opciones"] != null)
+        {
+            <ul>
+                @foreach (string opcion in ((List<string>)TempData["Opciones"]))
+                {
+                    <li>@opcion</li>
+                }
+            </ul>
+        }
+    </div>
+}
+@if (TempData["Ok"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["Ok"]
+    </div>
+}
+
+<h1 class="text-center">Crear Libro</h1>
+
+
+<div class="row">
+    <div class="offset-12">
+        <div class="card border">
+            <div class="card-header bg-dark">
+                <h3 class="text-white"><strong>Creacion de Libro</strong></h3>
+            </div>
+            <div class="card-body">
+                <form asp-action="Crear" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <label asp-for="IdAutor" class="control-label"></label>
+                        <select asp-for="IdAutor" class="form-control">
+                            <option value="0">Selecciona un autor</option>
+                            @foreach (var item in ViewBag.Autores)
+                            {
+                                <option value="@item.IdAutorPk">@item.NombreCompleto</option>
+                            }
+                        </select>
+                        <span asp-validation-for="IdAutor" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Titulo" class="control-label"></label>
+                        <input asp-for="Titulo" class="form-control" placeholder="Digita el Titulo" />
+                        <span asp-validation-for="Titulo" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Año" class="control-label"></label>
+                        <input asp-for="Año" class="form-control" placeholder="Digita el Año" />
+                        <span asp-validation-for="Año" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Genero" class="control-label"></label>
+                        <input asp-for="Genero" class="form-control" placeholder="Digita el Genero" />
+                        <span asp-validation-for="Genero" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="NumPaginas" class="control-label"></label>
+                        <input asp-for="NumPaginas" class="form-control" placeholder="Digita el numero de paginas" />
+                        <span asp-validation-for="NumPaginas" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <button type="submit" class="btn btn-secondary d-block mx-auto">Registrar Libro</button>
+                    </div>
+                </form>
+                <a asp-asp-controller="Libro" asp-action="Index">Volver</a>
+            </div>
+        </div>
+    </div>
+</div>

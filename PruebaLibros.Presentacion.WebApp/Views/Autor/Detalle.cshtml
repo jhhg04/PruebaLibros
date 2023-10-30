@@ -1,0 +1,51 @@
+﻿@model AutorDTO
+@{
+    ViewData["Title"] = "Consultar Autor";
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["Error"]
+        @if (TempData["Opciones"] != null)
+        {
+            <ul>
+                @foreach (string opcion in ((List<string>)TempData["Opciones"]))
+                {
+                    <li>@opcion</li>
+                }
+            </ul>
+        }
+    </div>
+}
+@if (TempData["Ok"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["Ok"]
+    </div>
+}
+
+<h1 class="text-center">Detalle Autor</h1>
+
+
+<div class="row">
+    <div class="offset-12">
+        <div class="card border">
+            <div class="card-header bg-dark">
+                <h3 class="text-white"><strong>Detalle de Autor</strong></h3>
+            </div>
+            <div class="card-body">
+                
+                <ul class="list-group">
+                    <li class="list-group-item"><strong>Identificador: </strong>@Html.DisplayFor(a=>a.IdAutor)</li>
+                    <li class="list-group-item"><strong>Nombre: </strong>@Html.DisplayFor(a=>a.NombreCompleto)</li>
+                    <li class="list-group-item"><strong>Fecha Nacimiento: </strong>@Html.DisplayFor(a=>a.FechaNacimiento)</li>
+                    <li class="list-group-item"><strong>Ciudad: </strong>@Html.DisplayFor(a=>a.Ciudad)</li>
+                    <li class="list-group-item"><strong>Correo: </strong>@Html.DisplayFor(a=>a.Correo)</li>                    
+                </ul>
+
+                <a asp-asp-controller="Autor" asp-action="Index">Volver</a>
+            </div>
+        </div>
+    </div>
+</div>

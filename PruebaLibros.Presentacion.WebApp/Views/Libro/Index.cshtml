@@ -1,0 +1,120 @@
+﻿@model IEnumerable<LibroDTO>
+@{
+    ViewData["Title"] = "Listado de Libros";
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["Error"]
+        @if (TempData["Opciones"] != null)
+        {
+            <ul>
+                @foreach (string opcion in ((List<string>)TempData["Opciones"]))
+                {
+                    <li>@opcion</li>
+                }
+            </ul>
+        }
+    </div>
+}
+@if (TempData["Ok"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["Ok"]
+    </div>
+}
+
+<h1 class="text-center">Libros</h1>
+<div class="row">
+    <div class="offset-9 col-3 mb-3">
+        <a asp-action="Crear" asp-controller="Libro" class="btn btn-secondary d-block mx-auto btn-lg">Nuevo Libro</a>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="offset-12">
+        <div class="card border">
+            <div class="card-header bg-dark">
+                <h3 class="text-white"><strong>Lista de Libros</strong></h3>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    @if (Model != null && Model.Count() > 0)
+                    {
+                        <table class="table table-bordered w100" id="tblLibros" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>@Html.DisplayNameFor(l =>l.IdLibro)</th>
+                                    <th>@Html.DisplayNameFor(l =>l.IdAutor)</th>
+                                    <th>Nombre Autor</th>
+                                    <th>@Html.DisplayNameFor(l =>l.Titulo)</th>
+                                    <th>@Html.DisplayNameFor(l =>l.Año)</th>
+                                    <th>@Html.DisplayNameFor(l =>l.Genero)</th>
+                                    <th>@Html.DisplayNameFor(l =>l.NumPaginas)</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@Html.DisplayFor(l =>item.IdLibro)</td>
+                                        <td>@Html.DisplayFor(l =>item.IdAutor)</td>
+                                        <td>@Html.DisplayFor(l =>item.Autor.NombreCompleto)</td>
+                                        <td>@Html.DisplayFor(l =>item.Titulo)</td>
+                                        <td>@Html.DisplayFor(l =>item.Año)</td>
+                                        <td>@Html.DisplayFor(l =>item.Genero)</td>
+                                        <td>@Html.DisplayFor(l =>item.NumPaginas)</td>
+                                        <td>
+                                            <a class="btn btn-warning" asp-action="Editar" asp-route-id="@item.IdLibro">Editar</a>
+                                            <a class="btn btn-secondary" asp-action="Detalle" asp-route-id="@item.IdLibro">Detalle</a>
+                                            <a class="btn btn-danger" asp-action="Eliminar" asp-route-id="@item.IdLibro">Eliminar</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <p>Sin datos</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#tblLibros').DataTable(
+                {
+                    language:
+                    {
+                        "decimal": "",
+                        "emptyTable": "Sin datos",
+                        "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                        "infoEmpty": "Mostrando 0 a 0 de 0 registros",
+                        "infoFiltered": "(Filtrando de _MAX_ total registros)",
+                        "infoPostFix": "",
+                        "thousands": ",",
+                        "lengthMenu": "Mostrar _MENU_ Registros",
+                        "loadingRecords": "Cargando...",
+                        "processing": "Procesando...",
+                        "search": "Buscar:",
+                        "zeroRecords": "Sin resultados",
+                        "paginate":
+                        {
+                            "first": "Primero",
+                            "last": "Ultimo",
+                            "next": "Siguiente",
+                            "previous": "Anterior",
+                        }
+                    }
+                }
+            )
+        })
+    </script>
+}

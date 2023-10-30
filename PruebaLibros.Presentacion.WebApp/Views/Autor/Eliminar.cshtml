@@ -1,0 +1,75 @@
+﻿@model AutorDTO
+@{
+    ViewData["Title"] = "Eliminar Autor";
+}
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["Error"]
+        @if (TempData["Opciones"] != null)
+        {
+            <ul>
+                @foreach (string opcion in ((List<string>)TempData["Opciones"]))
+                {
+                    <li>@opcion</li>
+                }
+            </ul>
+        }
+    </div>
+}
+@if (TempData["Ok"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["Ok"]
+    </div>
+}
+
+<h1 class="text-center">Eliminar Autor</h1>
+
+
+<div class="row">
+    <div class="offset-12">
+        <div class="card border">
+            <div class="card-header bg-dark">
+                <h3 class="text-white"><strong>Eliminacion de Autor</strong></h3>
+            </div>
+            <div class="card-body">
+                <form asp-action="Eliminar" method="post">
+                    
+                    <input type="hidden" asp-for="IdAutor"/>
+                    
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="form-group">
+                        <label asp-for="NombreCompleto" class="control-label"></label>
+                        <input asp-for="NombreCompleto" class="form-control" readonly />
+                        <span asp-validation-for="NombreCompleto" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="FechaNacimiento" class="control-label"></label>
+                        <input asp-for="FechaNacimiento" class="form-control" readonly />
+                        <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Ciudad" class="control-label"></label>
+                        <input asp-for="Ciudad" class="form-control" readonly />
+                        <span asp-validation-for="Ciudad" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Correo" class="control-label"></label>
+                        <input asp-for="Correo" class="form-control" readonly />
+                        <span asp-validation-for="Correo" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group mt-3">
+                        <button type="submit" class="btn btn-primary d-block mx-auto">Eliminar Autor</button>
+                    </div>
+                </form>
+                <a asp-asp-controller="Autor" asp-action="Index">Volver</a>
+            </div>
+        </div>
+    </div>
+</div>

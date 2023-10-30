@@ -1,0 +1,3 @@
+﻿dotnet ef migrations add Inicial --context ContextoBD --output-dir MigracionesEF --project ../PruebaLibros.Infraestructura.Data/PruebaLibros.Infraestructura.Data.csproj
+
+dotnet ef migrations remove --context ContextoBD --project ../PruebaLibros.Infraestructura.Data/PruebaLibros.Infraestructura.Data.csproj
